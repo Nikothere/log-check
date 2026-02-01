@@ -23,8 +23,8 @@ public class Main {
                 waring++;
             }
         }
-        System.out.println(color.RED + "error:" + error+ color.RESET +"");
-        System.out.println(color.YELLOW + "waring:" + waring+ color.RESET +"");
+        System.out.println(color.RED + "error: " + error+ color.RESET +"");
+        System.out.println(color.YELLOW + "waring: " + waring+ color.RESET +"");
         System.out.println(color.BLUE + "info: " + info + color.RESET + "");
 
     }
