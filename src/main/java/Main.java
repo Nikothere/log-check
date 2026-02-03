@@ -1,31 +1,50 @@
+import java.awt.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<String> lines = Files.readAllLines(Path.of("./src/main/resources/log.log"));
+        if (args.length == 0) {
+            System.out.println("a tool that is always at hand");
+            System.out.println(".__                                        .__   \n" +
+                    "|  |   ____   ____           _____    ____ |  |  \n" +
+                    "|  |  /  _ \\ / ___\\   ______ \\__  \\  /    \\|  |  \n" +
+                    "|  |_(  <_> ) /_/  > /_____/  / __ \\|   |  \\  |__\n" +
+                    "|____/\\____/\\___  /          (____  /___|  /____/\n" +
+                    "           /_____/                \\/     \\/      " +
+                    "" +
+                    "By: Niko_there");
+            System.out.println(Ansi.BLUE + "Usage:" + Ansi.RESET + " log-anl <log-file>");
+            return;
+        }
 
 
-        int error = 0;
-        int waring = 0;
-        int info = 0;
+        Path file = Path.of(args[0]);
+
+        if (!Files.exists(file)) {
+            System.out.println(Ansi.RED + "file not exist: " + Ansi.RESET + file);
+        }
+
+        List<String> lines = Files.readAllLines(file);
+
+        int war = 0;
+        int err = 0;
+        int inf = 0;
+
         for (String line : lines) {
-            if (line.contains("ERROR")) {
-                error++;
-            }
-            if (line.contains("INFO")) {
-                info++;
-            }
-            if (line.contains("WARING")) {
-                waring++;
+            if (line.contains("WARNING")) {
+                war++;
+            } if (line.contains("ERROR")) {
+                err++;
+
+            }  if (line.contains("INFO")) {
+                inf++;
             }
         }
-        System.out.println(color.RED + "error: " + error+ color.RESET +"");
-        System.out.println(color.YELLOW + "waring: " + waring+ color.RESET +"");
-        System.out.println(color.BLUE + "info: " + info + color.RESET + "");
-
+        System.out.println(Ansi.RED + "error" + Ansi.RESET + err);
+        System.out.println(Ansi.BLUE + "info:" + Ansi.RESET + inf);
+        System.out.println(Ansi.YELLOW + "warning:" + Ansi.RESET + war);
     }
 }
